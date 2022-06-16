@@ -76,6 +76,7 @@ return [
         'default' => [
             'query' => [
                 "employees" => App\GraphQL\Queries\EmployeesQuery::class,
+                'employeesPagination' => App\GraphQL\Queries\EmployeesPaginationQuery::class,
                 "users" => App\GraphQL\Queries\UsersQuery::class,
                 // ExampleQuery::class,
             ],
