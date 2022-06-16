@@ -36,7 +36,20 @@ class CreateEmployeeMutation extends Mutation
                 'name' => 'phone_no', 
                 'type' => Type::string(),
             ],
+            'status' => [
+                'name' => 'status', 
+                'type' => Type::string(),
+            ],
             
+        ];
+    }
+
+    public function validationErrorMessages(array $args = []): array
+    {
+        return [
+            'name.required' => 'Please enter your full name',
+            'code.string' => 'Your code must be a valid string',
+            'code.exists' => 'Sorry, this code is already in use',
         ];
     }
 
@@ -45,7 +58,8 @@ class CreateEmployeeMutation extends Mutation
         $employee = Employee::create([
             'name' => $args['name'],
             'code' => $args['code'],
-            'phone_no' => $args['phone_no']
+            'phone_no' => $args['phone_no'],
+            'status' => $args['status']
         ]);
         
         return $employee;

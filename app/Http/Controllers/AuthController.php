@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         $user = User::create($validatedData);
         $accessToken = $user->createToken('apiToken')->accessToken;
-        return response(['user' => $user, 'access_token' => $accessToken]);
+        return response(['token' => $accessToken]);
     }
 
     public function login(Request $request) {
@@ -32,10 +32,20 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if (! Auth::attempt($credentials)) {
-            return response(['message' => 'Invalid credentials']);
+            
+            return response()->json(['message' => 'Invalid credentials']);
         }
+        Auth::user()->tokens()->delete();
         $accessToken = Auth::user()->createToken('apiToken')->accessToken;
 
-        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+        // return response()->json([ 'data' => [
+        //     'access_token' => $accessToken
+        // ]]);
+
+        return response()->json(['token' => $accessToken]);
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
     }
 }

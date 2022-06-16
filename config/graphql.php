@@ -77,15 +77,17 @@ return [
             'query' => [
                 "employees" => App\GraphQL\Queries\EmployeesQuery::class,
                 'employeesPagination' => App\GraphQL\Queries\EmployeesPaginationQuery::class,
-                "users" => App\GraphQL\Queries\UsersQuery::class,
+                // "users" => App\GraphQL\Queries\UsersQuery::class,
                 // ExampleQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
                 'createEmployee' => App\GraphQL\Mutations\CreateEmployeeMutation::class,
-                'registerUser' => App\GraphQL\Mutations\RegisterUserMutation::class,
-                'loginUser' => App\GraphQL\Mutations\LoginUserMutation::class,
-                'logoutUser' => App\GraphQL\Mutations\LogoutUserMutation::class,
+                'updateEmployee' => App\GraphQL\Mutations\UpdateEmployeeMutation::class,
+                'deleteEmployee' => App\GraphQL\Mutations\DeleteEmployeeMutation::class,
+                // 'registerUser' => App\GraphQL\Mutations\RegisterUserMutation::class,
+                // 'loginUser' => App\GraphQL\Mutations\LoginUserMutation::class,
+                // 'logoutUser' => App\GraphQL\Mutations\LogoutUserMutation::class,
             ],
             // The types only available in this schema
             'types' => [
