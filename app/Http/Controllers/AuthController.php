@@ -12,18 +12,16 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-
         $validatedData = $request->validate([   
-
             'name' => 'required|max:60',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:4',
-            
+            'password' => 'required|confirmed|min:4',
         ]);
 
         $user = User::create($validatedData);
         $accessToken = $user->createToken('apiToken')->accessToken;
         return response(['token' => $accessToken]);
+
     }
 
     public function login(Request $request) {
@@ -31,6 +29,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
         if (! Auth::attempt($credentials)) {
             
             return response()->json(['message' => 'Invalid credentials']);
