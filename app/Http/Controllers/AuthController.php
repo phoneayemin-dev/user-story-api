@@ -18,6 +18,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:4',
         ]);
 
+        $validatedData['password'] = bcrypt($validatedData['password']);
         $user = User::create($validatedData);
         $accessToken = $user->createToken('apiToken')->accessToken;
         return response(['token' => $accessToken]);
